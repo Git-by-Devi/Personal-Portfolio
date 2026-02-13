@@ -1,0 +1,209 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+% ---------- Custom Commands ----------
+\newcommand{\resumeItem}[1]{
+  \item\small{{#1 \vspace{-2pt}}}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+  \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \textbf{\small #2} \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+  \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+    \small#1 & \textbf{\small #2}\\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+% ---------- Document ----------
+\begin{document}
+
+% ---------- Header ----------
+\begin{center}
+    {\Huge \scshape Devi Selvakumar} \\ \vspace{1pt}
+    Coimbatore, Tamil Nadu, India \\ \vspace{1pt}
+    \small
+    \faPhone\ +91-XXXXXXXXXX ~
+    \faEnvelope\ \href{mailto:deviselvakumar2@gmail.com}{deviselvakumar2@gmail.com} ~
+    \faLinkedin\ \href{https://www.linkedin.com/in/devi-selvakumar}{linkedin.com/in/devi-selvakumar} ~
+    \faGithub\ \href{https://github.com/Git-by-Devi}{github.com/Git-by-Devi} ~
+    \faGlobe\ \href{https://deviselvakumar.dev}{deviselvakumar.dev}
+    \vspace{-8pt}
+\end{center}
+
+% ---------- Summary ----------
+\section{Summary}
+\small{
+Electronics and Communication Engineering student with a strong passion for full-stack web development and emerging technologies. Experienced in building scalable web applications using the MERN stack, with hands-on expertise in IoT systems, robotics, and electronics manufacturing. Committed to creating user-friendly applications and innovative technical solutions.
+}
+
+% ---------- Education ----------
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {M Kumarasamy College of Engineering}{2023 -- 2027}
+    {Bachelor of Engineering in Electronics and Communication Engineering}{CGPA: 8.5/10}
+\resumeSubHeadingListEnd
+
+% ---------- Technical Skills ----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+    \textbf{Languages}{: JavaScript, TypeScript, Python, C++, HTML, CSS} \\
+    \textbf{Frontend}{: React.js, Next.js, Tailwind CSS, Framer Motion, Material-UI} \\
+    \textbf{Backend}{: Node.js, Express.js, MongoDB, PostgreSQL, RESTful APIs} \\
+    \textbf{Tools \& Technologies}{: Git, GitHub, VS Code, Postman, Vite, npm, Docker} \\
+    \textbf{Hardware \& Electronics}{: Arduino, Raspberry Pi, IoT Systems, PCB Design (Altium), Digital Electronics} \\
+    \textbf{Cloud \& DevOps}{: Cloud Computing, Industrial IoT (NPTEL Certified)} \\
+  }}
+\end{itemize}
+
+% ---------- Experience ----------
+\section{Experience}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {IoT \& Robotics Intern}{2024}
+    {National Small Industries Corporation (NSIC)}{Coimbatore, India}
+    \resumeItemListStart
+      \resumeItem{Developed IoT-based robotics projects integrating sensors and actuators with microcontrollers}
+      \resumeItem{Gained hands-on experience in embedded systems programming and real-time data processing}
+      \resumeItem{Collaborated with a team to design and implement automation solutions for industrial applications}
+    \resumeItemListEnd
+
+  \resumeSubheading
+    {Electronics Manufacturing Intern}{2024}
+    {Popular Systems}{Coimbatore, India}
+    \resumeItemListStart
+      \resumeItem{Assisted in the assembly, testing, and quality control of electronic components and circuit boards}
+      \resumeItem{Learned about PCB design, soldering techniques, and electronics manufacturing processes}
+      \resumeItem{Contributed to troubleshooting and debugging electronic systems in production}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+% ---------- Projects ----------
+\section{Projects}
+\resumeSubHeadingListStart
+  \resumeProjectHeading
+    {\textbf{Hotel Management System} $|$ \emph{MERN Stack, Tailwind CSS}}{2024}
+    \resumeItemListStart
+      \resumeItem{Built a full-stack web application for managing hotel operations including room booking and customer management}
+      \resumeItem{Implemented user authentication, reservation system, and admin dashboard with real-time updates}
+      \resumeItem{Utilized MongoDB for database management and Express.js for RESTful API development}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Staff Portal} $|$ \emph{React.js, Node.js, MongoDB}}{2024}
+    \resumeItemListStart
+      \resumeItem{Developed an internal staff management portal with role-based access control and task assignment features}
+      \resumeItem{Integrated attendance tracking, payroll management, and communication tools}
+      \resumeItem{Designed responsive UI with modern design principles for optimal user experience}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Library Management System} $|$ \emph{JavaScript, Express.js, PostgreSQL}}{2024}
+    \resumeItemListStart
+      \resumeItem{Created a digital library system for book cataloging, member management, and lending operations}
+      \resumeItem{Implemented search functionality, due date notifications, and fine calculation automation}
+      \resumeItem{Designed database schema with proper normalization and indexing for efficient queries}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Fire Detection System} $|$ \emph{Arduino, Sensors, IoT}}{2024}
+    \resumeItemListStart
+      \resumeItem{Designed an IoT-based fire detection system using temperature and smoke sensors with Arduino}
+      \resumeItem{Integrated real-time alerts via SMS and mobile notifications for emergency response}
+      \resumeItem{Calibrated sensors for accurate detection and minimized false alarms}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Safety First System} $|$ \emph{Embedded Systems, C++}}{2024}
+    \resumeItemListStart
+      \resumeItem{Developed a safety monitoring system for industrial environments with multiple sensor integrations}
+      \resumeItem{Implemented automated shutdown protocols based on hazard detection thresholds}
+      \resumeItem{Created user-friendly interface for monitoring system status and generating safety reports}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Drip Bag Monitor} $|$ \emph{Arduino, Healthcare IoT}}{2024}
+    \resumeItemListStart
+      \resumeItem{Built a medical device monitoring system to track IV drip levels and alert healthcare staff}
+      \resumeItem{Used ultrasonic sensors and load cells for accurate fluid level measurement}
+      \resumeItem{Developed a dashboard for real-time monitoring across multiple patient beds}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+% ---------- Certifications ----------
+\section{Certifications}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \item \textbf{Cloud Computing} -- NPTEL (National Programme on Technology Enhanced Learning)
+  \item \textbf{Industrial IoT} -- NPTEL (National Programme on Technology Enhanced Learning)
+  \item \textbf{PCB Design with Altium} -- Professional Training Course
+  \item \textbf{Robotics \& IoT Internship} -- NSIC (National Small Industries Corporation)
+  \item \textbf{German Language Certification} -- Language Institute
+  \item \textbf{IEEE Workshop} -- IEEE Student Chapter, KPR Institute
+  \item \textbf{Creafeast Paper Presentation} -- KPR Institute Technical Symposium
+\end{itemize}
+
+% ---------- Achievements ----------
+\section{Achievements \& Activities}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \item Presented technical paper at Creafeast symposium hosted by KPR Institute
+  \item Completed multiple NPTEL online courses with excellent performance in Cloud Computing and Industrial IoT
+  \item Active participant in IEEE technical workshops and student chapter activities
+  \item Developed 6+ full-stack web applications and IoT projects demonstrating practical skills
+\end{itemize}
+
+\end{document}

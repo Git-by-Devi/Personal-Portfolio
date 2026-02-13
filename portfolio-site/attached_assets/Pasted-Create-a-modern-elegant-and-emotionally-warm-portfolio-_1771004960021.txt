@@ -1,0 +1,130 @@
+Create a modern, elegant, and emotionally warm portfolio landing page for a young professional woman.
+
+The website should feel premium, minimal, romantic-professional, and highly polished — suitable for both recruiters and personal branding.
+
+🎨 Design Style
+
+Clean, minimal UI with soft gradients
+
+Color palette: pastel pink, lavender, beige, soft gold accents
+
+Smooth animations (fade-in, slide-up, hover effects)
+
+Glassmorphism / subtle blur cards
+
+Elegant typography (Playfair Display / Poppins / Inter style fonts)
+
+Fully responsive (mobile-first)
+
+🧭 Page Structure (Single-page scrolling)
+1️⃣ Hero Section
+
+Large elegant heading: “Hi, I’m [Her Name]”
+
+Short poetic tagline (e.g., “Turning ideas into meaningful experiences”)
+
+Soft animated background or gradient mesh
+
+Call-to-action buttons:
+
+“View My Work”
+
+“Contact Me”
+
+2️⃣ About Me
+
+Profile image (circular / soft rounded)
+
+Warm, confident bio paragraph
+
+Bullet highlights:
+
+Education
+
+Core interests
+
+Personality traits (creative, detail-oriented, passionate, etc.)
+
+3️⃣ Certifications
+
+Card-based layout
+
+Each card includes:
+
+Certification title
+
+Issuing organization
+
+Year
+
+Subtle hover animation
+
+4️⃣ Projects
+
+Grid layout (2–3 columns)
+
+Each project card includes:
+
+Project image / illustration
+
+Project title
+
+Short description
+
+Tech stack / tools used
+
+“View Project” button
+
+Smooth hover elevation effect
+
+5️⃣ Contact Section
+
+Friendly heading: “Let’s Connect 💌”
+
+Contact form:
+
+Name
+
+Email
+
+Message
+
+Social icons:
+
+LinkedIn
+
+GitHub
+
+Instagram
+
+Email
+
+6️⃣ Footer
+
+Soft closing line:
+
+“Designed with love and intention”
+
+Copyright
+
+⚙️ Tech Requirements
+
+Use HTML, CSS, and JavaScript (or React if preferred)
+
+Use modern CSS (Flexbox / Grid)
+
+Add smooth scrolling
+
+Clean, readable code
+
+No placeholder lorem ipsum — write meaningful sample content
+
+✨ Extra Touch
+
+Add subtle micro-interactions
+
+Make it feel personal, warm, and impressive
+
+Overall vibe: “soft but powerful”
+
+Generate the full working code and ensure it looks stunning on both desktop and mobile.
