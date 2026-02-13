@@ -2,5 +2,5 @@
   "version": 2,
   "installCommand": "cd portfolio-site && npm install",
   "buildCommand": "cd portfolio-site && npm run build",
-  "outputDirectory": "portfolio-site/client/dist"
+  "outputDirectory": "portfolio-site/dist/public"
 }
