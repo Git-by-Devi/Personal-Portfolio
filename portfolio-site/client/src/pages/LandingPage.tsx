@@ -20,7 +20,7 @@ import {
   ChevronDown,
   Download
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const certificates = [
   {
@@ -64,6 +64,29 @@ const certificates = [
     image: "/images/pcb_design_altium.jpeg"
   }
 ];
+
+const techStack = {
+  row1: [
+    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", color: "#61DAFB" },
+    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", color: "#339933" },
+    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", color: "#3178C6" },
+    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", color: "#F7DF1E" },
+    { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", color: "#3776AB" },
+    { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", color: "#47A248" },
+    { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", color: "#000000" },
+    { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", color: "#336791" },
+  ],
+  row2: [
+    { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg", color: "#06B6D4" },
+    { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", color: "#F05032" },
+    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", color: "#2496ED" },
+    { name: "Linux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", color: "#FCC624" },
+    { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", color: "#FFCA28" },
+    { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", color: "#F24E1E" },
+    { name: "Arduino", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg", color: "#00979D" },
+    { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg", color: "#00599C" },
+  ]
+};
 
 export default function LandingPage() {
   const [showAllCertificates, setShowAllCertificates] = useState(false);
@@ -178,7 +201,7 @@ export default function LandingPage() {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative" />
                   </motion.button>
                 </Link>
-                <a href="/Devi_Selvakumar_Resume.pdf" download="Devi_Selvakumar_Resume.pdf">
+                <a href="/devi_resume.pdf" download="Devi_Selvakumar_Resume.pdf">
                   <motion.button 
                     whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(14, 165, 233, 0.3)" }}
                     whileTap={{ scale: 0.95 }}
@@ -443,66 +466,6 @@ export default function LandingPage() {
                   </defs>
                 </motion.svg>
               </motion.div>
-
-              {/* Tech Stack */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.05, x: 5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ delay: 1.0, duration: 0.6 }}
-                className="relative cursor-pointer"
-              >
-                <motion.svg
-                  width="220"
-                  height="60"
-                  viewBox="0 0 220 60"
-                  className="overflow-visible"
-                >
-                  <motion.text
-                    x="10"
-                    y="35"
-                    className="font-display font-bold"
-                    fontSize="28"
-                    fill="url(#gradient4)"
-                  >
-                    {["M", "E", "R", "N"].map((char, i) => (
-                      <motion.tspan
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 2.5 + i * 0.1, duration: 0.1 }}
-                      >
-                        {char}
-                      </motion.tspan>
-                    ))}
-                  </motion.text>
-                  <motion.text
-                    x="120"
-                    y="35"
-                    className="font-sans"
-                    fontSize="16"
-                    fill="#6b7280"
-                  >
-                    {["S", "t", "a", "c", "k"].map((char, i) => (
-                      <motion.tspan
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 2.9 + i * 0.05, duration: 0.1 }}
-                      >
-                        {char}
-                      </motion.tspan>
-                    ))}
-                  </motion.text>
-                  <defs>
-                    <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#06b6d4" />
-                      <stop offset="100%" stopColor="#0891b2" />
-                    </linearGradient>
-                  </defs>
-                </motion.svg>
-              </motion.div>
             </div>
           </div>
         </div>
@@ -620,8 +583,8 @@ export default function LandingPage() {
               <ProjectCard
                 title="Hotel Management System"
                 description="Web application for room booking, availability checking, authentication, and booking management."
-                image="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80"
-                tags={["Web Dev", "Authentication", "Booking System"]}
+                image="/images/hotel-management.jpg"
+                tags={["JavaScript", "Node.js", "MongoDB"]}
                 delay={0}
                 link="https://github.com/Git-by-Devi/HOTEL-MANAGEMENT-SYSTEM"
               />
@@ -630,8 +593,8 @@ export default function LandingPage() {
               <ProjectCard
                 title="Staff Info & Leave Portal"
                 description="Role-based system for managing leave, tasks, approvals using React and Supabase."
-                image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
-                tags={["React", "Supabase", "Role-based Auth"]}
+                image="/images/staff-portal.jpg"
+                tags={["React", "TypeScript", "PostgreSQL"]}
                 delay={0.2}
                 link="https://github.com/Git-by-Devi/STAFF-INFO-AND-LEAVE-PORTAL-SYSTEM"
               />
@@ -640,8 +603,8 @@ export default function LandingPage() {
               <ProjectCard
                 title="Library Management System"
                 description="Full-stack system to manage books, students, transactions and authentication."
-                image="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80"
-                tags={["Full Stack", "MySQL", "CRUD Operations"]}
+                image="/images/library-system.jpg"
+                tags={["Python", "MySQL", "Flask"]}
                 delay={0.4}
                 link="https://github.com/Git-by-Devi/library-management-system"
               />
@@ -650,8 +613,8 @@ export default function LandingPage() {
               <ProjectCard
                 title="Safety First Initiative"
                 description="IC555 based road safety system that detects vehicles and triggers alerts near construction zones."
-                image="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80"
-                tags={["IoT", "IC555", "Safety System"]}
+                image="/images/safety-initiative.jpg"
+                tags={["Arduino", "C++", "IoT"]}
                 delay={0}
               />
             </motion.div>
@@ -659,8 +622,8 @@ export default function LandingPage() {
               <ProjectCard
                 title="Drip Bag Monitoring System"
                 description="Healthcare system to alert nurses when IV fluid reaches critical level using alerts."
-                image="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80"
-                tags={["Healthcare", "IoT", "Alert System"]}
+                image="/images/drip-bag-system.jpg"
+                tags={["Arduino", "C++", "Healthcare"]}
                 delay={0.2}
               />
             </motion.div>
@@ -668,13 +631,86 @@ export default function LandingPage() {
               <ProjectCard
                 title="Smart Fire Survivor Detection"
                 description="Fire detection system with automatic extinguishing and mobile alert features."
-                image="https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&q=80"
-                tags={["IoT", "Safety", "Automation"]}
+                image="/images/fire-detection.jpg"
+                tags={["Arduino", "C++", "Firebase"]}
                 delay={0.4}
                 link="https://github.com/Git-by-Devi/SMART-FIRE-SURVIVOR-DETECTION-SYSTEM"
               />
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* TECH STACK */}
+      <section id="tech-stack" className="py-24 bg-white/50 dark:bg-gray-900/50 snap-start snap-always min-h-screen flex items-center">
+        <div className="container mx-auto px-4 md:px-8">
+          <SectionHeading title="Tech Stack" subtitle="Technologies I work with" />
+          
+          <div className="space-y-8">
+              {/* Row 1 - Moving Right */}
+              <div className="relative overflow-hidden">
+                <motion.div
+                  className="flex gap-6"
+                  animate={{
+                    x: ["0%", "-50%"],
+                  }}
+                  transition={{
+                    x: {
+                      duration: 25,
+                      repeat: Infinity,
+                      ease: "linear",
+                      repeatType: "loop",
+                    },
+                  }}
+                >
+                  {[...techStack.row1, ...techStack.row1, ...techStack.row1].map((tech, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-shrink-0 w-20 h-20 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 dark:border-gray-700"
+                      title={tech.name}
+                    >
+                      <img
+                        src={tech.icon}
+                        alt={tech.name}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Row 2 - Moving Left */}
+              <div className="relative overflow-hidden">
+                <motion.div
+                  className="flex gap-6"
+                  animate={{
+                    x: ["-50%", "0%"],
+                  }}
+                  transition={{
+                    x: {
+                      duration: 25,
+                      repeat: Infinity,
+                      ease: "linear",
+                      repeatType: "loop",
+                    },
+                  }}
+                >
+                  {[...techStack.row2, ...techStack.row2, ...techStack.row2].map((tech, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-shrink-0 w-20 h-20 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all hover:scale-110 border border-gray-200 dark:border-gray-700"
+                      title={tech.name}
+                    >
+                      <img
+                        src={tech.icon}
+                        alt={tech.name}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
         </div>
       </section>
 
@@ -723,7 +759,9 @@ export default function LandingPage() {
                 </p>
                 
                 <a 
-                  href="mailto:deviselvakumar2@gmail.com?subject=Portfolio Inquiry" 
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=deviselvakumar2@gmail.com&su=Portfolio Inquiry" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="block w-full py-4 bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white text-center font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
                 >
                   Send Email

@@ -5,12 +5,13 @@ interface ProjectCardProps {
   title: string;
   description: string;
   image: string;
-  tags: string[];
+  tags?: string[];
+  techIcons?: string[];
   delay?: number;
   link?: string;
 }
 
-export function ProjectCard({ title, description, image, tags, delay = 0, link }: ProjectCardProps) {
+export function ProjectCard({ title, description, image, tags, techIcons, delay = 0, link }: ProjectCardProps) {
   const CardContent = (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -44,16 +45,29 @@ export function ProjectCard({ title, description, image, tags, delay = 0, link }
           {description}
         </p>
         
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span 
-              key={tag} 
-              className="px-3 py-1 bg-secondary text-secondary-foreground text-xs font-medium rounded-full tracking-wide"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        {techIcons && techIcons.length > 0 ? (
+          <div className="flex gap-2">
+            {techIcons.map((icon, idx) => (
+              <div 
+                key={idx} 
+                className="w-8 h-8 bg-white dark:bg-gray-700 rounded-full p-1.5 shadow-md border border-gray-200 dark:border-gray-600 hover:scale-110 transition-transform"
+              >
+                <img src={icon} alt="tech" className="w-full h-full object-contain" />
+              </div>
+            ))}
+          </div>
+        ) : tags && tags.length > 0 ? (
+          <div className="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span 
+                key={tag} 
+                className="px-3 py-1 bg-secondary text-secondary-foreground text-xs font-medium rounded-full tracking-wide"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        ) : null}
       </div>
     </motion.div>
   );
