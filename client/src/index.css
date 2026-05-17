@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Elegant, warm, romantic palette - LIGHT MODE */
+  /* Base - Warm Off-White */
+  --background: 40 33% 98%;
+  --foreground: 270 10% 20%;
+
+  /* Primary - Muted Lavender/Pink */
+  --primary: 330 45% 65%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Secondary - Soft Beige/Gold */
+  --secondary: 40 40% 90%;
+  --secondary-foreground: 270 10% 30%;
+
+  /* Accent - Soft Gold */
+  --accent: 42 60% 65%;
+  --accent-foreground: 270 10% 20%;
+
+  /* Muted - Dustry Rose Gray */
+  --muted: 330 15% 94%;
+  --muted-foreground: 330 10% 40%;
+
+  /* Cards - Pure White with opacity */
+  --card: 0 0% 100%;
+  --card-foreground: 270 10% 20%;
+  
+  --border: 330 20% 90%;
+  --input: 330 20% 92%;
+  --ring: 330 45% 65%;
+  --radius: 1rem;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  /* Fonts */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Dancing Script', cursive;
+}
+
+.dark {
+  /* Dark mode - Elegant deep tones */
+  --background: 240 10% 10%;
+  --foreground: 40 20% 95%;
+
+  /* Primary - Brighter Lavender for dark */
+  --primary: 330 50% 75%;
+  --primary-foreground: 240 10% 10%;
+
+  /* Secondary - Deep Gray */
+  --secondary: 240 5% 20%;
+  --secondary-foreground: 40 20% 90%;
+
+  /* Accent - Warm Gold */
+  --accent: 42 70% 70%;
+  --accent-foreground: 240 10% 10%;
+
+  /* Muted - Dark Gray */
+  --muted: 240 5% 18%;
+  --muted-foreground: 240 5% 65%;
+
+  /* Cards - Dark Surface */
+  --card: 240 8% 15%;
+  --card-foreground: 40 20% 95%;
+  
+  --border: 240 5% 25%;
+  --input: 240 5% 20%;
+  --ring: 330 50% 75%;
+
+  --destructive: 0 70% 60%;
+  --destructive-foreground: 0 0% 98%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased font-body selection:bg-primary/20 selection:text-primary-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-foreground;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-shadow-sm {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+  
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-xl;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary;
+  }
+
+  .hologram-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hologram-glow::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(255, 182, 193, 0.2) 30%,
+      rgba(230, 190, 255, 0.2) 50%,
+      rgba(255, 215, 0, 0.1) 70%,
+      transparent 100%
+    );
+    z-index: 10;
+    pointer-events: none;
+    animation: hologram-shift 8s linear infinite;
+    mix-blend-mode: soft-light;
+  }
+
+  @keyframes hologram-shift {
+    0% { transform: rotate(0deg) translate(-10%, -10%); }
+    50% { transform: rotate(180deg) translate(10%, 10%); }
+    100% { transform: rotate(360deg) translate(-10%, -10%); }
+  }
+
+  .bg-mesh {
+    background-color: hsla(40, 33%, 98%, 1);
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(330, 45%, 65%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(270, 45%, 65%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(42, 60%, 65%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(330, 45%, 65%, 0.1) 0px, transparent 50%);
+  }
+
+  .dark .bg-mesh {
+    background-color: hsla(240, 10%, 10%, 1);
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(330, 50%, 45%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(270, 50%, 45%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(42, 70%, 45%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(330, 50%, 45%, 0.15) 0px, transparent 50%);
+  }
+}
