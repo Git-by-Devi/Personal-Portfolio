@@ -62,6 +62,46 @@ const certificates = [
     title: "PCB Design with Altium",
     issuer: "Training Institute",
     image: "/images/pcb_design_altium.jpeg"
+  },
+  {
+    title: "6G Wireless Communication Paper Presentation",
+    issuer: "Kanam",
+    image: "/images/6g_wirelesee_comm_Paper_presentaion_kanam.jpeg"
+  },
+  {
+    title: "Project Presentation",
+    issuer: "BIT",
+    image: "/images/BIT_project_presentation.jpeg"
+  },
+  {
+    title: "Daksha Workshop",
+    issuer: "KSR",
+    image: "/images/Daksha_workshop@ksr.jpeg"
+  },
+  {
+    title: "IEEE Conference Paper Presentation",
+    issuer: "IEEE",
+    image: "/images/IEEE_Conference_paper_presentation.jpeg"
+  },
+  {
+    title: "Network Security",
+    issuer: "NPTEL",
+    image: "/images/NPTEL_network_security.jpeg"
+  },
+  {
+    title: "System Design Fundamentals",
+    issuer: "Pearson",
+    image: "/images/Pearson_system_design_fundamentals.jpeg"
+  },
+  {
+    title: "TCS CodeVita Rank Certificate",
+    issuer: "TCS",
+    image: "/images/TCS_codevita_rank_cert.jpeg"
+  },
+  {
+    title: "Yugam Hackathon",
+    issuer: "Yugam",
+    image: "/images/Yugam_hackathon.jpeg"
   }
 ];
 
@@ -201,7 +241,7 @@ export default function LandingPage() {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative" />
                   </motion.button>
                 </Link>
-                <a href="/devi_resume.pdf" download="Devi_Selvakumar_Resume.pdf">
+                <a href="/DEVI_S_T_RESUME.pdf" download="DEVI_S_T_RESUME.pdf">
                   <motion.button 
                     whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(14, 165, 233, 0.3)" }}
                     whileTap={{ scale: 0.95 }}

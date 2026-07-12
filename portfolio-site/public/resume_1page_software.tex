@@ -1,0 +1,183 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+% ---------- Custom Commands ----------
+\newcommand{\resumeItem}[1]{
+  \item\small{{#1 \vspace{-2pt}}}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+  \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \textbf{\small #2} \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+  \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+    \small#1 & \textbf{\small #2}\\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+% ---------- Document ----------
+\begin{document}
+
+% ---------- Header ----------
+\begin{center}
+    {\Huge \scshape Devi S T} \\ \vspace{1pt}
+    Erode, Tamil Nadu, India \\ \vspace{1pt}
+    \small
+    \faPhone\ +91-6380688697 ~
+    \faEnvelope\ \href{mailto:deviselvakumar2@gmail.com}{deviselvakumar2@gmail.com} ~
+    \faLinkedin\ \href{https://www.linkedin.com/in/devi-selvakumar}{linkedin.com} ~
+    \faGithub\ \href{https://github.com/Git-by-Devi}{github}
+    \faGlobe\ \href{https://personal-portfolio-sand-six-18.vercel.app/}{portfolio}
+    \vspace{-8pt}
+\end{center}
+
+% ---------- Career Objective ----------
+\section{Career Objective}
+\small{
+Motivated Engineering student with a keen interest in software development, passionate about solving real-world problems through technology. Seeking a software-based entry-level role to apply strong analytical skills, hands-on project experience, and a continuous learning mindset to contribute meaningfully to a dynamic engineering team.
+}
+
+% ---------- Education ----------
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {M.Kumarasamy College of Engineering}{2023 -- 2027}
+    {B.E. in Electronics and Communication Engineering}{CGPA: 8.5/10}
+  \resumeSubheading
+    {SPK Matriculation Higher Secondary School}{2023}
+    {Higher Secondary}{Percentage: 83\%}
+\resumeSubHeadingListEnd
+
+% ---------- Technical Skills ----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+    \textbf{Programming Languages}{: JavaScript, Java, C, Python, HTML, CSS} \\
+    \textbf{Frontend}{: React.js, Tailwind CSS, Bootstrap, Framer Motion, Responsive Design} \\
+    \textbf{Backend}{: Node.js, Express.js, RESTful APIs, Authentication} \\
+    \textbf{Databases}{: MongoDB, MySQL, PostgreSQL, Supabase} \\
+    \textbf{Tools \& Deployment}{: Git, GitHub, VS Code, Docker, Vercel, Render, Vite, npm} \\
+  }}
+\end{itemize}
+
+% ---------- Experience ----------
+\section{Internships \& Training}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {Inplant Training -- Embedded Systems}{2024}
+    {CODEBIND Technologies}{Coimbatore, India}
+    \resumeItemListStart
+      \resumeItem{Developed software for microcontroller systems; gained experience in programming fundamentals and hardware--software integration}
+    \resumeItemListEnd
+
+  \resumeSubheading
+    {IoT in Robotics -- Internship Training}{Jan 2025}
+    {NSIC Technical Services Centre}{Coimbatore, India}
+    \resumeItemListStart
+      \resumeItem{Built software interfaces for IoT-based robotic systems; worked with data processing, sensor APIs, and automation logic}
+    \resumeItemListEnd
+
+  \resumeSubheading
+    {Intern -- Electronics Manufacturing}{Jun -- Jul 2025}
+    {Popular Systems}{Coimbatore, India}
+    \resumeItemListStart
+      \resumeItem{Observed system-level integration and quality control workflows; gained exposure to production software environments}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+% ---------- Projects ----------
+\section{Projects}
+\resumeSubHeadingListStart
+  \resumeProjectHeading
+    {\textbf{Hotel Management System} $|$ \emph{MERN Stack, Tailwind CSS}}{2024}
+    \resumeItemListStart
+      \resumeItem{Built a full-stack web app with real-time room booking, user authentication, and admin dashboard}
+      \resumeItem{Implemented RESTful APIs with Express.js and MongoDB for booking management and customer data handling}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Staff Leave Portal System} $|$ \emph{React.js, Node.js, MongoDB}}{2024}
+    \resumeItemListStart
+      \resumeItem{Developed an employee and manager portal for leave applications, approvals, and task tracking}
+      \resumeItem{Incorporated role-based access control and real-time data management for streamlined workflows}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Library Management System} $|$ \emph{JavaScript, Express.js, PostgreSQL}}{2024}
+    \resumeItemListStart
+      \resumeItem{Created a full-stack system for book inventory, student transactions, and authentication}
+      \resumeItem{Designed normalized database schema with real-time updates, responsive UI, and seamless integration}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+% ---------- Certifications ----------
+\section{Certifications}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \item \textbf{The Joy of Computing using Python} -- NPTEL / IIT Madras
+  \item \textbf{Cloud Computing} -- NPTEL / IIT Kharagpur
+  \item \textbf{German Language Certification (A1.1)} -- Inlingua, Chennai
+\end{itemize}
+
+% ---------- Activities ----------
+\section{Participations}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \item \textbf{CREAFEST '25} -- Project Presentation at National Level Technical Symposium
+  \item \textbf{KANAM '25} -- Paper Presentation at techno-cultural event on the topic 6G wireless communication
+  \item \textbf{HackIt on '25} -- Actively participated in 24 hr national level hackathon
+  \item \textbf{Yugam '26} -- Computer vision based Project Presentation at National Level Technical Symposium
+\end{itemize}
+
+\end{document}
