@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { ReactNode } from "react";
 
 interface ProjectCardProps {
   title: string;
@@ -9,9 +10,11 @@ interface ProjectCardProps {
   techIcons?: string[];
   delay?: number;
   link?: string;
+  /** Interactive demo shown instead of the image */
+  demo?: ReactNode;
 }
 
-export function ProjectCard({ title, description, image, tags, techIcons, delay = 0, link }: ProjectCardProps) {
+export function ProjectCard({ title, description, image, tags, techIcons, delay = 0, link, demo }: ProjectCardProps) {
   const CardContent = (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -20,7 +23,7 @@ export function ProjectCard({ title, description, image, tags, techIcons, delay 
       transition={{ duration: 0.6, delay }}
       className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-primary/5 dark:border-gray-700"
     >
-      <div className="relative h-64 overflow-hidden">
+      {demo ?? <div className="relative h-64 overflow-hidden">
         <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 mix-blend-multiply" />
         {/* Descriptive alt for image search replacement */}
         {/* modern minimalist website interface design showcase */}
@@ -35,7 +38,7 @@ export function ProjectCard({ title, description, image, tags, techIcons, delay 
             <ArrowUpRight className="w-5 h-5" />
           </button>
         </div>
-      </div>
+      </div>}
       
       <div className="p-8">
         <h3 className="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors dark:text-gray-100">
