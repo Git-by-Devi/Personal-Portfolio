@@ -11,6 +11,7 @@ import { DripBagDemo } from "@/components/DripBagDemo";
 import { ProjectArt, type ProjectArtId } from "@/components/ProjectArt";
 import { ResumeDrawer } from "@/components/ResumeDrawer";
 import { Reveal } from "@/components/Reveal";
+import { CircuitBackground } from "@/components/CircuitBackground";
 import { Github, Linkedin, Mail, ArrowRight, FileText } from "lucide-react";
 import { useState } from "react";
 
@@ -217,7 +218,8 @@ export default function LandingPage() {
   const rotateY = useSpring(useTransform(tiltX, [-0.5, 0.5], [-8, 8]), { stiffness: 150, damping: 18 });
 
   return (
-    <div className="min-h-screen bg-mesh text-foreground overflow-x-hidden">
+    <div className="relative isolate min-h-screen bg-mesh text-foreground overflow-x-hidden">
+      <CircuitBackground />
       <Navigation />
       <ResumeDrawer open={resumeOpen} onClose={() => setResumeOpen(false)} />
 
