@@ -3,12 +3,12 @@ import { Link } from "react-scroll";
 import { Navigation } from "@/components/Navigation";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ProjectCard } from "@/components/ProjectCard";
-import CursorTracker from "@/components/CursorTracker";
 import { HandwrittenGreeting } from "@/components/HandwrittenGreeting";
 import { RotatingRole } from "@/components/RotatingRole";
 import { PetalField } from "@/components/PetalField";
 import { CertificateFan } from "@/components/CertificateFan";
 import { DripBagDemo } from "@/components/DripBagDemo";
+import { ProjectArt, type ProjectArtId } from "@/components/ProjectArt";
 import { ResumeDrawer } from "@/components/ResumeDrawer";
 import { Reveal } from "@/components/Reveal";
 import { Github, Linkedin, Mail, ArrowRight, FileText } from "lucide-react";
@@ -129,6 +129,7 @@ const projects: (ProjectInfo & { category: "web" | "iot" })[] = [
   {
     category: "web",
     title: "Hotel Management System",
+    art: "hotel",
     description: "Web application for room booking, availability checking, authentication, and booking management.",
     image: "/images/hotel-management.jpg",
     tags: ["JavaScript", "Node.js", "MongoDB"],
@@ -137,6 +138,7 @@ const projects: (ProjectInfo & { category: "web" | "iot" })[] = [
   {
     category: "web",
     title: "Staff Info & Leave Portal",
+    art: "staff",
     description: "Role-based system for managing leave, tasks, approvals using React and Supabase.",
     image: "/images/staff-portal.jpg",
     tags: ["React", "TypeScript", "PostgreSQL"],
@@ -145,6 +147,7 @@ const projects: (ProjectInfo & { category: "web" | "iot" })[] = [
   {
     category: "web",
     title: "Library Management System",
+    art: "library",
     description: "Full-stack system to manage books, students, transactions and authentication.",
     image: "/images/library-system.jpg",
     tags: ["Python", "MySQL", "Flask"],
@@ -153,6 +156,7 @@ const projects: (ProjectInfo & { category: "web" | "iot" })[] = [
   {
     category: "iot",
     title: "Safety First Initiative",
+    art: "safety",
     description: "IC555 based road safety system that detects vehicles and triggers alerts near construction zones.",
     image: "/images/safety-initiative.jpg",
     tags: ["Arduino", "C++", "IoT"],
@@ -160,6 +164,7 @@ const projects: (ProjectInfo & { category: "web" | "iot" })[] = [
   {
     category: "iot",
     title: "Drip Bag Monitoring System",
+    art: "drip",
     description: "Healthcare system to alert nurses when IV fluid reaches critical level using alerts.",
     image: "/images/drip-bag-system.jpg",
     tags: ["Arduino", "C++", "Healthcare"],
@@ -168,6 +173,7 @@ const projects: (ProjectInfo & { category: "web" | "iot" })[] = [
   {
     category: "iot",
     title: "Smart Fire Survivor Detection",
+    art: "fire",
     description: "Fire detection system with automatic extinguishing and mobile alert features.",
     image: "/images/fire-detection.jpg",
     tags: ["Arduino", "C++", "Firebase"],
@@ -182,6 +188,7 @@ interface ProjectInfo {
   tags: string[];
   link?: string;
   demo?: boolean;
+  art: ProjectArtId;
 }
 
 const FILTERS = [
@@ -211,7 +218,6 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-mesh text-foreground overflow-x-hidden">
-      <CursorTracker />
       <Navigation />
       <ResumeDrawer open={resumeOpen} onClose={() => setResumeOpen(false)} />
 
@@ -454,6 +460,7 @@ export default function LandingPage() {
                     link={p.link}
                     delay={(i % 3) * 0.1}
                     demo={p.demo ? <DripBagDemo /> : undefined}
+                    art={<ProjectArt id={p.art} title={p.title} />}
                   />
                 </motion.div>
               ))}

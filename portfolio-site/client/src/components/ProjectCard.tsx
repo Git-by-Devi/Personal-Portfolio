@@ -10,11 +10,13 @@ interface ProjectCardProps {
   techIcons?: string[];
   delay?: number;
   link?: string;
+  /** Illustration shown instead of the photo */
+  art?: ReactNode;
   /** Interactive demo shown instead of the image */
   demo?: ReactNode;
 }
 
-export function ProjectCard({ title, description, image, tags, techIcons, delay = 0, link, demo }: ProjectCardProps) {
+export function ProjectCard({ title, description, image, tags, techIcons, delay = 0, link, demo, art }: ProjectCardProps) {
   const CardContent = (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -24,14 +26,16 @@ export function ProjectCard({ title, description, image, tags, techIcons, delay 
       className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-primary/5 dark:border-gray-700"
     >
       {demo ?? <div className="relative h-64 overflow-hidden">
-        <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 mix-blend-multiply" />
-        {/* Descriptive alt for image search replacement */}
-        {/* modern minimalist website interface design showcase */}
-        <img 
-          src={image} 
-          alt={title} 
-          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
-        />
+        {art ?? (
+          <>
+            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 mix-blend-multiply" />
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+            />
+          </>
+        )}
         
         <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
           <button className="bg-white dark:bg-gray-700 p-3 rounded-full shadow-lg text-foreground dark:text-gray-100 hover:text-primary transition-colors">
