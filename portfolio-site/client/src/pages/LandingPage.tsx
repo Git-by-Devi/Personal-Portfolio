@@ -1,28 +1,26 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Link } from "react-scroll";
 import { Navigation } from "@/components/Navigation";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ProjectCard } from "@/components/ProjectCard";
-import CursorTracker from "@/components/CursorTracker";
-import { 
-  Github, 
-  Linkedin, 
-  Instagram, 
-  Mail, 
-  ArrowRight, 
-  Award, 
-  Code, 
-  Palette,
-  Terminal,
-  Smartphone,
-  Globe,
-  Loader2,
-  ChevronDown,
-  Download
-} from "lucide-react";
-import { useState, useEffect } from "react";
+import { HandwrittenGreeting } from "@/components/HandwrittenGreeting";
+import { RotatingRole } from "@/components/RotatingRole";
+import { PetalField } from "@/components/PetalField";
+import { CertificateFan } from "@/components/CertificateFan";
+import { DripBagDemo } from "@/components/DripBagDemo";
+import { ProjectArt, type ProjectArtId } from "@/components/ProjectArt";
+import { ResumeDrawer } from "@/components/ResumeDrawer";
+import { Reveal } from "@/components/Reveal";
+import { CircuitBackground } from "@/components/CircuitBackground";
+import { Github, Linkedin, Mail, ArrowRight, FileText } from "lucide-react";
+import { useState } from "react";
 
 const certificates = [
+  {
+    title: "Stanford Osman Lab Research Study",
+    issuer: "Stanford University",
+    image: "/images/staford.jpeg"
+  },
   {
     title: "Creafeast Paper Presentation",
     issuer: "KPR Institute",
@@ -128,435 +126,277 @@ const techStack = {
   ]
 };
 
-export default function LandingPage() {
-  const [showAllCertificates, setShowAllCertificates] = useState(false);
+const projects: (ProjectInfo & { category: "web" | "iot" })[] = [
+  {
+    category: "web",
+    title: "Hotel Management System",
+    art: "hotel",
+    description: "Web application for room booking, availability checking, authentication, and booking management.",
+    image: "/images/hotel-management.jpg",
+    tags: ["JavaScript", "Node.js", "MongoDB"],
+    link: "https://github.com/Git-by-Devi/HOTEL-MANAGEMENT-SYSTEM",
+  },
+  {
+    category: "web",
+    title: "Staff Info & Leave Portal",
+    art: "staff",
+    description: "Role-based system for managing leave, tasks, approvals using React and Supabase.",
+    image: "/images/staff-portal.jpg",
+    tags: ["React", "TypeScript", "PostgreSQL"],
+    link: "https://github.com/Git-by-Devi/STAFF-INFO-AND-LEAVE-PORTAL-SYSTEM",
+  },
+  {
+    category: "web",
+    title: "Library Management System",
+    art: "library",
+    description: "Full-stack system to manage books, students, transactions and authentication.",
+    image: "/images/library-system.jpg",
+    tags: ["Python", "MySQL", "Flask"],
+    link: "https://github.com/Git-by-Devi/library-management-system",
+  },
+  {
+    category: "iot",
+    title: "Safety First Initiative",
+    art: "safety",
+    description: "IC555 based road safety system that detects vehicles and triggers alerts near construction zones.",
+    image: "/images/safety-initiative.jpg",
+    tags: ["Arduino", "C++", "IoT"],
+  },
+  {
+    category: "iot",
+    title: "Drip Bag Monitoring System",
+    art: "drip",
+    description: "Healthcare system to alert nurses when IV fluid reaches critical level using alerts.",
+    image: "/images/drip-bag-system.jpg",
+    tags: ["Arduino", "C++", "Healthcare"],
+    demo: true,
+  },
+  {
+    category: "iot",
+    title: "Smart Fire Survivor Detection",
+    art: "fire",
+    description: "Fire detection system with automatic extinguishing and mobile alert features.",
+    image: "/images/fire-detection.jpg",
+    tags: ["Arduino", "C++", "Firebase"],
+    link: "https://github.com/Git-by-Devi/SMART-FIRE-SURVIVOR-DETECTION-SYSTEM",
+  },
+];
 
-  const titleLetters = "Devi Selvakumar".split("");
+interface ProjectInfo {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  link?: string;
+  demo?: boolean;
+  art: ProjectArtId;
+}
+
+const FILTERS = [
+  { id: "all", label: "All" },
+  { id: "web", label: "Web" },
+  { id: "iot", label: "IoT & Electronics" },
+] as const;
+
+const ROLES = ["Web Developer", "IoT Builder", "PCB Designer", "Tech Enthusiast"];
+
+const STATS = [
+  { value: "8.5", label: "CGPA" },
+  { value: String(projects.length), label: "Projects" },
+  { value: String(certificates.length), label: "Certificates" },
+];
+
+export default function LandingPage() {
+  const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("all");
+  const [resumeOpen, setResumeOpen] = useState(false);
+  const shownProjects = filter === "all" ? projects : projects.filter((p) => p.category === filter);
+
+  // Hero photo tilts gently toward the cursor
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(tiltY, [-0.5, 0.5], [8, -8]), { stiffness: 150, damping: 18 });
+  const rotateY = useSpring(useTransform(tiltX, [-0.5, 0.5], [-8, 8]), { stiffness: 150, damping: 18 });
 
   return (
-    <div className="min-h-screen bg-mesh text-foreground overflow-x-hidden overflow-y-auto snap-y snap-mandatory">
-      <CursorTracker />
+    <div className="relative isolate min-h-screen bg-mesh text-foreground overflow-x-hidden">
+      <CircuitBackground />
       <Navigation />
+      <ResumeDrawer open={resumeOpen} onClose={() => setResumeOpen(false)} />
 
       {/* HERO SECTION */}
-      <section id="hero" className="relative min-h-screen flex items-center pt-20 overflow-hidden snap-start snap-always">
+      <section id="hero" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
         {/* Animated Background Elements */}
-        <motion.div 
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], x: [0, 50, 0], y: [0, -30, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 rounded-full blur-[100px] -z-10" 
+          className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 rounded-full blur-[100px] -z-10"
         />
-        <motion.div 
-          animate={{
-            scale: [1, 1.1, 1],
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-          }}
+        <motion.div
+          animate={{ scale: [1, 1.1, 1], x: [0, -40, 0], y: [0, 40, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-cyan-500/20 via-blue-500/20 to-accent/20 rounded-full blur-[120px] -z-10" 
-        />
-        <motion.div 
-          animate={{
-            rotate: [0, 360],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-r from-orange-500/10 via-pink-500/10 to-purple-500/10 rounded-full blur-[100px] -z-10"
+          className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-primary/15 via-accent/15 to-accent/20 rounded-full blur-[120px] -z-10"
         />
 
         <div className="container mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-12 items-center">
           <div className="relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="font-accent text-3xl text-primary block mb-4">
-                { "Hello, I'm ".split("").map((char, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: i * 0.05 }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-                <span className="inline-flex relative">
-                  <span className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent blur-sm opacity-50">
-                    {titleLetters.map((char, i) => (
-                      <motion.span key={`blur-${i}`} className="inline-block">
-                        {char === " " ? "\u00A0" : char}
-                      </motion.span>
-                    ))}
-                  </span>
-                  <span className="relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    {titleLetters.map((char, i) => (
-                      <motion.span
-                        key={i}
-                        whileHover={{ scale: 1.2, y: -5 }}
-                        className="inline-block cursor-default"
-                      >
-                        {char === " " ? "\u00A0" : char}
-                      </motion.span>
-                    ))}
-                  </span>
-                </span>
-              </span>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+              <HandwrittenGreeting text="Hello, I'm Devi Selvakumar" className="text-3xl md:text-4xl block mb-4" />
               <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
                 <motion.span
                   initial={{ opacity: 0, filter: "blur(10px)" }}
                   animate={{ opacity: 1, filter: "blur(0px)" }}
                   transition={{ duration: 1 }}
+                  className="block"
                 >
-                  ECE Student <br />
+                  ECE Student &amp;
                 </motion.span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary animate-gradient hologram-glow">
-                  Web Developer & Tech Enthusiast
-                </span>
+                <RotatingRole words={ROLES} />
               </h1>
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 1 }}
                 className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg leading-relaxed"
               >
-                An Electronics and Communication Engineering student with a passion for creating user-friendly applications 
+                An Electronics and Communication Engineering student with a passion for creating user-friendly applications
                 and working with modern tools to develop meaningful solutions.
               </motion.p>
-              
-              <div className="flex flex-wrap gap-4">
+
+              {/* One button family: rose primary, gold outline, text link */}
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
                 <Link to="projects" smooth={true} offset={-80}>
-                  <motion.button 
-                    whileHover={{ scale: 1.05, boxShadow: "0 20px 60px rgba(168, 85, 247, 0.4)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white rounded-full font-medium transition-all flex items-center gap-2 group shadow-xl relative overflow-hidden"
+                  <motion.button
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.96 }}
+                    className="px-7 py-3.5 bg-primary text-primary-foreground rounded-full font-medium flex items-center gap-2 group shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-shadow"
                   >
-                    <span className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="relative">View My Work</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative" />
+                    View My Work
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </motion.button>
                 </Link>
-                <a href="/DEVI_S_T_RESUME.pdf" download="DEVI_S_T_RESUME.pdf">
-                  <motion.button 
-                    whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(14, 165, 233, 0.3)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-full font-medium transition-all flex items-center gap-2 group shadow-lg relative overflow-hidden"
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <Download className="w-4 h-4 group-hover:translate-y-1 transition-transform relative" />
-                    <span className="relative">Download Resume</span>
-                  </motion.button>
-                </a>
-                <Link to="contact" smooth={true} offset={-80}>
-                  <motion.button 
-                    whileHover={{ scale: 1.05, borderColor: "rgba(168, 85, 247, 0.8)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 border-2 border-primary/30 bg-white/50 dark:bg-gray-800/50 backdrop-blur-xl rounded-full font-medium hover:text-primary hover:border-primary transition-all shadow-lg hover:shadow-xl hover:shadow-primary/20"
-                  >
-                    Contact Me
-                  </motion.button>
+                <motion.button
+                  type="button"
+                  onClick={() => setResumeOpen(true)}
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="px-7 py-3.5 rounded-full font-medium flex items-center gap-2 border-2 border-accent text-foreground hover:bg-accent/15 transition-colors"
+                >
+                  <FileText className="w-4 h-4" />
+                  Résumé
+                </motion.button>
+                <Link to="contact" smooth={true} offset={-80} className="cursor-pointer font-medium text-foreground underline decoration-primary/40 underline-offset-[6px] hover:decoration-primary transition-colors">
+                  Contact me →
                 </Link>
+              </div>
+
+              {/* Stats (mobile: shown under the buttons) */}
+              <div className="flex md:hidden gap-8 mt-10">
+                {STATS.map((s) => (
+                  <div key={s.label}>
+                    <p className="font-display text-3xl font-bold text-primary leading-none">{s.value}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{s.label}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
 
-          <div className="hidden md:flex gap-16 items-center justify-center">
-            {/* Profile Image */}
+          <div className="hidden md:flex gap-14 items-center justify-center">
+            {/* Profile photo with drifting petals and a gentle cursor tilt */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ 
-                opacity: 1, 
-                scale: 1,
-                y: [0, -10, 0]
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative w-[340px] flex-shrink-0"
+              style={{ perspective: 900 }}
+              onPointerMove={(e) => {
+                const r = e.currentTarget.getBoundingClientRect();
+                tiltX.set((e.clientX - r.left) / r.width - 0.5);
+                tiltY.set((e.clientY - r.top) / r.height - 0.5);
               }}
-              transition={{ 
-                opacity: { duration: 0.8, delay: 0.2 },
-                scale: { duration: 0.8, delay: 0.2 },
-                y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+              onPointerLeave={() => {
+                tiltX.set(0);
+                tiltY.set(0);
               }}
-              className="relative w-[350px] flex-shrink-0"
             >
-               <div className="relative group">
-                 <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-300 animate-pulse -z-10" />
-                 <div className="relative z-10 w-full aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl transition-transform duration-500 border-4 border-white/50 dark:border-gray-700/50 backdrop-blur-sm hologram-glow hover:scale-105">
-                   <motion.img 
-                     whileHover={{ scale: 1.1 }}
-                     transition={{ duration: 0.3 }}
-                     src="/images/profile_pic.png" 
-                     alt="Devi Selvakumar" 
-                     className="w-full h-full object-cover"
-                   />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                   
-                   <div className="absolute bottom-8 left-8 text-white">
-                     <p className="font-accent text-2xl drop-shadow-lg">ECE Student & Web Developer</p>
-                   </div>
-                 </div>
-               </div>
-
-               {/* Decorative Elements */}
-               <motion.div 
-                 animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                 transition={{ duration: 4, repeat: Infinity }}
-                 className="absolute -top-12 -right-12 w-32 h-32 bg-gradient-to-br from-accent/40 to-orange-500/40 rounded-full blur-2xl -z-10" 
-               />
-               <motion.div 
-                 animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
-                 transition={{ duration: 5, repeat: Infinity }}
-                 className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-tr from-primary/40 to-purple-500/40 rounded-full blur-2xl -z-10" 
-               />
+              <PetalField className="absolute -inset-16 w-[calc(100%+8rem)] h-[calc(100%+8rem)] z-20" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary rounded-[3rem] blur-2xl opacity-40 -z-10" />
+              <motion.div
+                style={{ rotateX, rotateY }}
+                className="relative z-10 w-full aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white/60 dark:border-gray-700/60"
+              >
+                <img src="/images/profile_pic.png" alt="Devi Selvakumar" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <p className="absolute bottom-8 left-8 font-accent text-2xl text-white drop-shadow-lg">ECE Student &amp; Web Developer</p>
+              </motion.div>
             </motion.div>
 
-            {/* Animated Text Stats - Typewriter Style */}
+            {/* Stats, in the theme rose and counted from the data */}
             <div className="flex flex-col gap-8">
-              {/* CGPA */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.05, x: 5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="relative cursor-pointer group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-600/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
-                <motion.svg
-                  width="180"
-                  height="60"
-                  viewBox="0 0 180 60"
-                  className="overflow-visible drop-shadow-lg"
+              {STATS.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + i * 0.2, duration: 0.6 }}
                 >
-                  <defs>
-                    <filter id="glow1">
-                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                      <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  <motion.text
-                    x="10"
-                    y="35"
-                    className="font-display font-bold"
-                    fontSize="32"
-                    fill="url(#gradient1)"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5, duration: 0.1 }}
-                  >
-                    {["8", ".", "5"].map((char, i) => (
-                      <motion.tspan
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5 + i * 0.1, duration: 0.1 }}
-                      >
-                        {char}
-                      </motion.tspan>
-                    ))}
-                  </motion.text>
-                  <motion.text
-                    x="90"
-                    y="35"
-                    className="font-sans"
-                    fontSize="16"
-                    fill="#6b7280"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8, duration: 0.1 }}
-                  >
-                    {["C", "G", "P", "A"].map((char, i) => (
-                      <motion.tspan
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.8 + i * 0.05, duration: 0.1 }}
-                      >
-                        {char}
-                      </motion.tspan>
-                    ))}
-                  </motion.text>
-                  <defs>
-                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#3b82f6" />
-                      <stop offset="100%" stopColor="#2563eb" />
-                    </linearGradient>
-                  </defs>
-                </motion.svg>
-              </motion.div>
-
-              {/* Projects */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.05, x: 5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                className="relative cursor-pointer"
-              >
-                <motion.svg
-                  width="200"
-                  height="60"
-                  viewBox="0 0 200 60"
-                  className="overflow-visible"
-                >
-                  <motion.text
-                    x="10"
-                    y="35"
-                    className="font-display font-bold"
-                    fontSize="32"
-                    fill="url(#gradient2)"
-                  >
-                    {["6", "+"].map((char, i) => (
-                      <motion.tspan
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.2 + i * 0.1, duration: 0.1 }}
-                      >
-                        {char}
-                      </motion.tspan>
-                    ))}
-                  </motion.text>
-                  <motion.text
-                    x="80"
-                    y="35"
-                    className="font-sans"
-                    fontSize="16"
-                    fill="#6b7280"
-                  >
-                    {["P", "r", "o", "j", "e", "c", "t", "s"].map((char, i) => (
-                      <motion.tspan
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.4 + i * 0.05, duration: 0.1 }}
-                      >
-                        {char}
-                      </motion.tspan>
-                    ))}
-                  </motion.text>
-                  <defs>
-                    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#f97316" />
-                      <stop offset="100%" stopColor="#ea580c" />
-                    </linearGradient>
-                  </defs>
-                </motion.svg>
-              </motion.div>
-
-              {/* Certifications */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.05, x: 5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                className="relative cursor-pointer"
-              >
-                <motion.svg
-                  width="240"
-                  height="60"
-                  viewBox="0 0 240 60"
-                  className="overflow-visible"
-                >
-                  <motion.text
-                    x="10"
-                    y="35"
-                    className="font-display font-bold"
-                    fontSize="32"
-                    fill="url(#gradient3)"
-                  >
-                    <motion.tspan
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 1.8, duration: 0.1 }}
-                    >
-                      8
-                    </motion.tspan>
-                  </motion.text>
-                  <motion.text
-                    x="50"
-                    y="35"
-                    className="font-sans"
-                    fontSize="16"
-                    fill="#6b7280"
-                  >
-                    {["C", "e", "r", "t", "i", "f", "i", "c", "a", "t", "e", "s"].map((char, i) => (
-                      <motion.tspan
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.9 + i * 0.05, duration: 0.1 }}
-                      >
-                        {char}
-                      </motion.tspan>
-                    ))}
-                  </motion.text>
-                  <defs>
-                    <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#a855f7" />
-                      <stop offset="100%" stopColor="#ec4899" />
-                    </linearGradient>
-                  </defs>
-                </motion.svg>
-              </motion.div>
+                  <p className="font-display text-4xl font-bold text-primary leading-none">{s.value}</p>
+                  <p className="text-sm text-muted-foreground mt-1.5 tracking-wide">{s.label}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="py-24 bg-white/50 dark:bg-gray-900/50 snap-start snap-always min-h-screen flex items-center">
+      <section id="about" className="py-24 bg-white/50 dark:bg-gray-900/50">
         <div className="container mx-auto px-4 md:px-8">
           <SectionHeading title="About Me" subtitle="The person behind the pixels" />
-          
+
           <div className="grid md:grid-cols-12 gap-12 items-start">
-            <div className="md:col-span-4 flex justify-center">
+            <Reveal className="md:col-span-4 flex justify-center">
               <div className="relative w-64 h-64 md:w-80 md:h-80">
                 <div className="absolute inset-0 border-2 border-dashed border-primary rounded-full animate-[spin_10s_linear_infinite]" />
-                <div className="absolute inset-4 rounded-full overflow-hidden shadow-2xl border-4 border-white">
-                  <img 
-                    src="/images/girl_coder.jpg" 
-                    alt="Profile" 
-                    className="w-full h-full object-cover"
-                  />
+                <div className="absolute inset-4 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800">
+                  <img src="/images/profile_pic.png" alt="Devi Selvakumar" className="w-full h-full object-cover" style={{ transform: "scale(1.9)", transformOrigin: "50% 30%" }} />
                 </div>
               </div>
-            </div>
-            
+            </Reveal>
+
             <div className="md:col-span-8 space-y-8">
-              <h3 className="text-3xl font-display font-semibold dark:text-gray-100">
-                Hi, I'm Devi. I create technology solutions that make a difference.
-              </h3>
-              <p className="text-lg text-muted-foreground dark:text-gray-300 leading-relaxed">
-                An Electronics and Communication Engineering student with a strong interest in technology and innovation. 
-                I enjoy creating user-friendly applications and working with modern tools and technologies to develop meaningful solutions. 
-                Focused on continuous learning, improving technical abilities, and developing solutions that are both practical and impactful.
-              </p>
-              
+              <Reveal>
+                <h3 className="text-3xl font-display font-semibold dark:text-gray-100">
+                  Hi, I'm Devi. I create technology solutions that make a difference.
+                </h3>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="text-lg text-muted-foreground dark:text-gray-300 leading-relaxed">
+                  An Electronics and Communication Engineering student with a strong interest in technology and innovation.
+                  I enjoy creating user-friendly applications and working with modern tools and technologies to develop meaningful solutions.
+                  Focused on continuous learning, improving technical abilities, and developing solutions that are both practical and impactful.
+                </p>
+              </Reveal>
+
               <div className="grid sm:grid-cols-3 gap-6 pt-6">
                 {[
                   { title: "Education", items: ["B.E ECE (2023-2027)", "M Kumarasamy College of Engineering", "CGPA: 8.5/10"] },
                   { title: "Experience", items: ["NSIC – IoT in Robotics", "Popular Systems – Electronics Manufacturing"] },
-                  { title: "Expertise", items: ["Full Stack Dev", "Digital Electronics", "Problem Solving"] }
+                  { title: "Expertise", items: ["Full Stack Dev", "Digital Electronics", "Problem Solving"] },
                 ].map((col, idx) => (
-                  <div key={idx} className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl p-6 rounded-xl shadow-lg border border-primary/10 dark:border-gray-700 hover:shadow-2xl hover:scale-105 transition-all duration-300 hover:border-primary/30 group">
-                    <h4 className="font-bold text-foreground dark:text-gray-100 mb-4 border-b border-primary/20 dark:border-gray-700 pb-2 bg-gradient-to-r from-primary to-purple-600 bg-clip-text group-hover:text-transparent transition-all">{col.title}</h4>
-                    <ul className="space-y-2">
-                      {col.items.map(item => (
-                        <li key={item} className="text-sm text-muted-foreground dark:text-gray-300 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <Reveal key={col.title} delay={0.15 + idx * 0.1}>
+                    <div className="h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl p-6 rounded-xl shadow-lg border border-primary/10 dark:border-gray-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 hover:border-primary/30">
+                      <h4 className="font-bold text-foreground dark:text-gray-100 mb-4 border-b border-primary/20 dark:border-gray-700 pb-2">{col.title}</h4>
+                      <ul className="space-y-2">
+                        {col.items.map((item) => (
+                          <li key={item} className="text-sm text-muted-foreground dark:text-gray-300 flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </Reveal>
                 ))}
               </div>
             </div>
@@ -565,124 +405,74 @@ export default function LandingPage() {
       </section>
 
       {/* CERTIFICATIONS */}
-      <section id="certifications" className="py-24 relative overflow-hidden snap-start snap-always min-h-screen flex items-center">
-        {/* Background texture */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
-
+      <section id="certifications" className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           <SectionHeading title="Certifications" subtitle="Continuous Learning" />
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {certificates.slice(0, showAllCertificates ? certificates.length : 3).map((cert, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-primary/10 dark:border-gray-700 hover:border-primary/30 transition-all hover:-translate-y-2 hover:shadow-2xl group overflow-hidden"
-              >
-                <div className="aspect-[4/3] mb-4 rounded-lg overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
-                  <img 
-                    src={cert.image} 
-                    alt={cert.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <h3 className="text-lg font-bold font-display mb-2 dark:text-gray-100">{cert.title}</h3>
-                <p className="text-muted-foreground dark:text-gray-400 text-sm uppercase tracking-wide">{cert.issuer}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {!showAllCertificates && certificates.length > 3 && (
-            <div className="text-center mt-12">
-              <motion.button
-                onClick={() => setShowAllCertificates(true)}
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(168, 85, 247, 0.3)" }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl group relative overflow-hidden"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative">Load More Certificates</span>
-                <ChevronDown className="w-5 h-5 relative" />
-              </motion.button>
-            </div>
-          )}
+          <Reveal>
+            <CertificateFan items={certificates} />
+          </Reveal>
         </div>
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" className="py-24 bg-muted/30 dark:bg-gray-900/30 snap-start snap-always min-h-screen flex items-center">
+      <section id="projects" className="py-24 bg-muted/30 dark:bg-gray-900/30">
         <div className="container mx-auto px-4 md:px-8">
           <SectionHeading title="Selected Works" subtitle="Things I've built" />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <motion.div whileHover={{ y: -10 }} className="hologram-glow rounded-2xl overflow-hidden">
-              <ProjectCard
-                title="Hotel Management System"
-                description="Web application for room booking, availability checking, authentication, and booking management."
-                image="/images/hotel-management.jpg"
-                tags={["JavaScript", "Node.js", "MongoDB"]}
-                delay={0}
-                link="https://github.com/Git-by-Devi/HOTEL-MANAGEMENT-SYSTEM"
-              />
-            </motion.div>
-            <motion.div whileHover={{ y: -10 }} className="hologram-glow rounded-2xl overflow-hidden">
-              <ProjectCard
-                title="Staff Info & Leave Portal"
-                description="Role-based system for managing leave, tasks, approvals using React and Supabase."
-                image="/images/staff-portal.jpg"
-                tags={["React", "TypeScript", "PostgreSQL"]}
-                delay={0.2}
-                link="https://github.com/Git-by-Devi/STAFF-INFO-AND-LEAVE-PORTAL-SYSTEM"
-              />
-            </motion.div>
-            <motion.div whileHover={{ y: -10 }} className="hologram-glow rounded-2xl overflow-hidden">
-              <ProjectCard
-                title="Library Management System"
-                description="Full-stack system to manage books, students, transactions and authentication."
-                image="/images/library-system.jpg"
-                tags={["Python", "MySQL", "Flask"]}
-                delay={0.4}
-                link="https://github.com/Git-by-Devi/library-management-system"
-              />
-            </motion.div>
-            <motion.div whileHover={{ y: -10 }} className="hologram-glow rounded-2xl overflow-hidden">
-              <ProjectCard
-                title="Safety First Initiative"
-                description="IC555 based road safety system that detects vehicles and triggers alerts near construction zones."
-                image="/images/safety-initiative.jpg"
-                tags={["Arduino", "C++", "IoT"]}
-                delay={0}
-              />
-            </motion.div>
-            <motion.div whileHover={{ y: -10 }} className="hologram-glow rounded-2xl overflow-hidden">
-              <ProjectCard
-                title="Drip Bag Monitoring System"
-                description="Healthcare system to alert nurses when IV fluid reaches critical level using alerts."
-                image="/images/drip-bag-system.jpg"
-                tags={["Arduino", "C++", "Healthcare"]}
-                delay={0.2}
-              />
-            </motion.div>
-            <motion.div whileHover={{ y: -10 }} className="hologram-glow rounded-2xl overflow-hidden">
-              <ProjectCard
-                title="Smart Fire Survivor Detection"
-                description="Fire detection system with automatic extinguishing and mobile alert features."
-                image="/images/fire-detection.jpg"
-                tags={["Arduino", "C++", "Firebase"]}
-                delay={0.4}
-                link="https://github.com/Git-by-Devi/SMART-FIRE-SURVIVOR-DETECTION-SYSTEM"
-              />
-            </motion.div>
+          <div className="flex flex-wrap justify-center gap-3 mb-12" role="group" aria-label="Filter projects">
+            {FILTERS.map((f) => {
+              const count = f.id === "all" ? projects.length : projects.filter((p) => p.category === f.id).length;
+              const active = filter === f.id;
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setFilter(f.id)}
+                  className={`px-5 py-2 rounded-full text-sm font-medium border transition-colors ${
+                    active
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-white/70 dark:bg-gray-800/70 border-primary/20 hover:border-primary/50"
+                  }`}
+                >
+                  {f.label} <span className={active ? "opacity-80" : "text-muted-foreground"}>{count}</span>
+                </button>
+              );
+            })}
           </div>
+
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {shownProjects.map((p, i) => (
+                <motion.div
+                  key={p.title}
+                  layout
+                  initial={{ opacity: 0, scale: 0.94 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.94 }}
+                  transition={{ duration: 0.35 }}
+                  whileHover={{ y: -8 }}
+                  className="shimmer-card"
+                >
+                  <ProjectCard
+                    title={p.title}
+                    description={p.description}
+                    image={p.image}
+                    tags={p.tags}
+                    link={p.link}
+                    delay={(i % 3) * 0.1}
+                    demo={p.demo ? <DripBagDemo /> : undefined}
+                    art={<ProjectArt id={p.art} title={p.title} />}
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </section>
 
       {/* TECH STACK */}
-      <section id="tech-stack" className="py-24 bg-white/50 dark:bg-gray-900/50 snap-start snap-always min-h-screen flex items-center">
+      <section id="tech-stack" className="py-24 bg-white/50 dark:bg-gray-900/50">
         <div className="container mx-auto px-4 md:px-8">
           <SectionHeading title="Tech Stack" subtitle="Technologies I work with" />
           
@@ -755,7 +545,7 @@ export default function LandingPage() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="py-24 relative snap-start snap-always min-h-screen flex items-center">
+      <section id="contact" className="py-24 relative">
         <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-primary/5 -z-10" />
         
         <div className="container mx-auto px-4 md:px-8">
@@ -802,7 +592,7 @@ export default function LandingPage() {
                   href="https://mail.google.com/mail/?view=cm&fs=1&to=deviselvakumar2@gmail.com&su=Portfolio Inquiry" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-4 bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white text-center font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+                  className="block w-full py-4 bg-primary text-primary-foreground text-center font-bold rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all"
                 >
                   Send Email
                 </a>

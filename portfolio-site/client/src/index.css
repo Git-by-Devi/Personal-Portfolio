@@ -158,3 +158,125 @@
       radial-gradient(at 0% 100%, hsla(330, 50%, 45%, 0.15) 0px, transparent 50%);
   }
 }
+
+/* ===== Handwritten greeting ===== */
+.handwritten {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.handwritten-ink {
+  display: inline-block;
+  padding-right: 0.15em;
+  background: linear-gradient(90deg, hsl(var(--primary)), #c0569a 55%, hsl(var(--accent)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  clip-path: inset(0 100% 0 0);
+  animation: handwrite 2.6s cubic-bezier(0.45, 0.05, 0.4, 1) 0.3s forwards;
+}
+.handwritten-nib {
+  position: absolute;
+  top: 55%;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: hsl(var(--accent));
+  box-shadow: 0 0 12px hsl(var(--accent));
+  opacity: 0;
+  animation: handnib 2.6s cubic-bezier(0.45, 0.05, 0.4, 1) 0.3s forwards;
+}
+@keyframes handwrite {
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes handnib {
+  0% { left: 0; opacity: 1; }
+  95% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* ===== Rose-gold shimmer border on hover ===== */
+@property --shimmer-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.shimmer-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 1rem;
+}
+.shimmer-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(1rem + 2px);
+  background: conic-gradient(from var(--shimmer-angle), hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.shimmer-card:hover::before {
+  opacity: 1;
+  animation: shimmer-spin 3s linear infinite;
+}
+@keyframes shimmer-spin {
+  to { --shimmer-angle: 360deg; }
+}
+
+/* ===== Illustrated project covers (ProjectArt.tsx) ===== */
+.project-art { transition: transform 0.7s ease; }
+.group:hover .project-art { transform: scale(1.05); }
+.pa-stop-a { stop-color: hsl(var(--secondary)); }
+.pa-stop-b { stop-color: hsl(var(--muted)); }
+.pa-stop-glow { stop-color: hsl(var(--primary)); stop-opacity: 0.35; }
+.pa-paper { fill: hsl(var(--card)); }
+.pa-paper-2 { fill: hsl(var(--muted)); }
+.pa-shadow { fill: hsl(var(--foreground) / 0.08); }
+.pa-ink { fill: hsl(var(--foreground)); }
+.pa-ink-soft { fill: hsl(var(--foreground) / 0.55); }
+.pa-ink-faint { fill: hsl(var(--foreground) / 0.14); }
+.pa-ink-line { stroke: hsl(var(--foreground) / 0.25); fill: none; }
+.pa-muted { fill: hsl(var(--muted-foreground)); }
+.pa-rose, .pa-rose-text { fill: hsl(var(--primary)); }
+.pa-rose-soft { fill: hsl(var(--primary) / 0.35); }
+.pa-rose-line { stroke: hsl(var(--primary)); }
+.pa-on-rose, .pa-on-rose-fill { fill: hsl(var(--primary-foreground)); }
+.pa-gold { fill: hsl(var(--accent)); }
+.pa-gold-soft { fill: hsl(var(--accent) / 0.5); }
+.pa-plum { fill: hsl(285 28% 46%); }
+.pa-cell { fill: hsl(var(--muted)); }
+.pa-highlight { stroke: hsl(0 0% 100% / 0.6); }
+.pa-highlight-fill { fill: hsl(0 0% 100% / 0.45); }
+.pa-road { fill: hsl(var(--foreground) / 0.12); }
+.pa-road-line { stroke: hsl(var(--card)); fill: none; }
+.pa-chip { fill: #1f1b22; }
+.pa-chip-pin { fill: #b8b2bd; }
+.pa-chip-dot { fill: #3a333f; }
+.pa-chip-text { fill: #ece5ef; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 600; letter-spacing: 0.08em; }
+.pa-drop { fill: hsl(200 70% 66%); }
+.pa-serif { font-family: var(--font-display); font-weight: 600; }
+.pa-sans { font-family: var(--font-body); font-weight: 500; }
+
+.pa-twinkle { transform-box: fill-box; transform-origin: center; animation: pa-twinkle 3s ease-in-out infinite; }
+.pa-blink { animation: pa-blink 1.2s steps(2, jump-none) infinite; }
+.pa-pulse { animation: pa-pulse 1.8s ease-in-out infinite; }
+.pa-flicker { transform-box: fill-box; transform-origin: 50% 100%; animation: pa-flicker 1.4s ease-in-out infinite; }
+.pa-fall { animation: pa-fall 1.6s linear infinite; }
+.pa-spin-slow { transform-box: fill-box; transform-origin: center; animation: pa-spin 14s linear infinite; }
+.pa-flow { animation: pa-flow 1.2s linear infinite; }
+@keyframes pa-twinkle { 50% { opacity: 0.4; transform: scale(0.7); } }
+@keyframes pa-blink { 50% { opacity: 0.3; } }
+@keyframes pa-pulse { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes pa-flicker { 0%, 100% { transform: scale(1, 1); } 30% { transform: scale(0.94, 1.06); } 60% { transform: scale(1.05, 0.95); } }
+@keyframes pa-fall { from { transform: translateY(-10px); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(40px); opacity: 0; } }
+@keyframes pa-spin { to { transform: rotate(360deg); } }
+@keyframes pa-flow { to { stroke-dashoffset: -16; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .handwritten-ink { clip-path: none; animation: none; }
+  .handwritten-nib { display: none; }
+  .shimmer-card:hover::before { animation: none; }
+  .project-art * { animation: none !important; }
+}
