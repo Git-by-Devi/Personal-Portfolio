@@ -1,0 +1,187 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.85in}
+\addtolength{\textheight}{1.75in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-6pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+\pdfgentounicode=1
+
+% ---------- Custom Commands ----------
+\newcommand{\resumeItem}[1]{
+  \item\small{{#1 \vspace{-2pt}}}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-3pt}\item
+  \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \textbf{\small #2} \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+  \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+    \small#1 & \textbf{\small #2}\\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-7pt}}
+
+% ---------- Document ----------
+\begin{document}
+
+% ---------- Header ----------
+\begin{center}
+    {\Huge \scshape Devi S T} \\ \vspace{1pt}
+    Erode, Tamil Nadu, India \\ \vspace{1pt}
+    \small
+    \faPhone\ +91-6380688697 ~
+    \faEnvelope\ \href{mailto:deviselvakumar2@gmail.com}{deviselvakumar2@gmail.com} ~
+    \faLinkedin\ \href{https://www.linkedin.com/in/devi-selvakumar}{linkedin.com/in/devi-selvakumar} ~
+    \faGithub\ \href{https://github.com/Git-by-Devi}{github.com/Git-by-Devi} ~
+    \faGlobe\ \href{https://personal-portfolio-sand-six-18.vercel.app/}{portfolio}
+    \vspace{-8pt}
+\end{center}
+
+% ---------- Summary ----------
+\section{Summary}
+\small{
+Electronics and Communication Engineering student (CGPA 8.5) who builds and evaluates LLM, RAG and computer-vision systems. Experienced in writing and testing prompts, checking model outputs for faithfulness, bias and correctness, and explaining technical reasoning clearly in English. IEEE-published author and German utility-model holder, seeking AI training and evaluation work as a Handshake AI Fellow.
+}
+
+% ---------- Education ----------
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {M.Kumarasamy College of Engineering, Karur}{2023 -- 2027}
+    {B.E. in Electronics and Communication Engineering}{CGPA: 8.5/10}
+    \resumeItemListStart
+      \resumeItem{Coursework: Digital Electronics, Signals \& Systems, Communication Systems, VLSI, DBMS}
+    \resumeItemListEnd\vspace{6pt}
+  \resumeSubheading
+    {SPK Matriculation Higher Secondary School}{2023}
+    {Higher Secondary (HSC)}{Percentage: 83\%}
+\resumeSubHeadingListEnd
+
+% ---------- Skills ----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+    \textbf{AI / ML}{: LLM prompting \& evaluation, RAG, LangChain, LangGraph, DeepEval, Gemini, AWS Bedrock, YOLO, ONNX Runtime, ChromaDB} \\
+    \textbf{Programming}{: Python, JavaScript, Java, C, SQL, HTML, CSS} \\
+    \textbf{Web \& Backend}{: FastAPI, Flask, Node.js, Express.js, React.js, Next.js, REST APIs} \\
+    \textbf{Data \& Tools}{: PostgreSQL, MongoDB, MySQL, SQLite, Supabase, Git, Docker, Vercel, MATLAB, Vivado} \\
+    \textbf{Languages}{: English (professional), Tamil (native), German (A1.1)} \\
+  }}
+\end{itemize}
+
+% ---------- Projects ----------
+\section{AI Projects}
+\resumeSubHeadingListStart
+  \resumeProjectHeading
+    {\textbf{M\&A Due Diligence Agentic RAG} $|$ \emph{LangGraph, GPT-4, ChromaDB, DeepEval}}{2025}
+    \resumeItemListStart
+      \resumeItem{Built a multi-agent RAG system (finance, legal, ops, risk agents) for multi-hop reasoning over documents}
+      \resumeItem{Evaluated LLM answers with DeepEval/RAGAS (faithfulness, relevancy, citations) to catch hallucinations}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{Neutralis-AI -- AI Ethics MCP Server} $|$ \emph{Python, MCP, Gemini 2.5 Flash}}{2025}
+    \resumeItemListStart
+      \resumeItem{Built an MCP server that reviews AI conversations for bias, misinformation, privacy issues and harmful content}
+      \resumeItem{Added confirmation-bias detection and weighted pattern learning that improves ethical review over time}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{SkillSync -- AI Resume Filtering System} $|$ \emph{FastAPI, Gemini, React, PostgreSQL, ChromaDB}}{2025}
+    \resumeItemListStart
+      \resumeItem{Built a RAG application that screens 500+ resumes against job descriptions using semantic matching}
+      \resumeItem{Added automated email notifications, filtering, Excel export and cron-based batch processing}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{LoomGuard-AI \& SafeSight AI -- Vision Systems} $|$ \emph{YOLO, ONNX, FastAPI, Flask, Next.js, React}}{2026}
+    \resumeItemListStart
+      \resumeItem{Trained and deployed YOLO models for real-time fabric-defect detection and construction PPE-violation monitoring}
+      \resumeItem{Shipped full-stack dashboards with batch inference, object tracking, analytics APIs and CSV reporting}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+% ---------- Experience ----------
+\section{Internships \& Training}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {IoT in Robotics -- Internship Training}{Jan 2025}
+    {NSIC Technical Services Centre}{Coimbatore, India}
+    \resumeItemListStart
+      \resumeItem{Built software interfaces for IoT robotic systems using sensor data, APIs and automation logic}
+    \resumeItemListEnd\vspace{6pt}
+  \resumeSubheading
+    {Intern -- Electronics Manufacturing}{Jun -- Jul 2025}
+    {Popular Systems}{Coimbatore, India}
+    \resumeItemListStart
+      \resumeItem{Worked on system-level integration and quality-control workflows for electronics, solar and medical equipment}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+% ---------- Research & Achievements ----------
+\section{Research \& Achievements}
+\begin{itemize}[leftmargin=0.15in,itemsep=1pt]
+\small
+\item \textbf{IEEE Publication} -- ``Efficient Spectrum Sensing using Energy Detection'', ICCNCT 2026
+\item \textbf{German Utility Model (Gebrauchsmuster) Granted} -- Smart Fire Survivor Detection System, ID: 20264104647
+\item TUNARA '26 -- First Place, Product Expo; \quad TCS CodeVita Season 13 -- Global Rank 7456
+\item HackIt '25 -- 24-hour National Hackathon; \quad Yugam Hackathon participant
+\end{itemize}
+
+% ---------- Certifications ----------
+\section{Certifications}
+\begin{itemize}[leftmargin=0.15in,itemsep=1pt]
+\small
+\item Generative AI with Large Language Models -- Coursera; \quad System Design Fundamentals -- Pearson
+\item Network Security -- NPTEL; \quad The Joy of Computing using Python -- NPTEL (IIT Madras)
+\item Java (Basic) -- HackerRank; \quad PCB Basic Design -- Altium Education
+\end{itemize}
+
+\end{document}
