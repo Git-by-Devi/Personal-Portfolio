@@ -1,0 +1,187 @@
+\documentclass[letterpaper,10.5pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Balanced margins
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Clean section spacing
+\titleformat{\section}
+{\vspace{-3pt}\scshape\raggedright\large\bfseries}
+{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
+
+\pdfgentounicode=1
+
+% ---------- Custom Commands ----------
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{1pt}\item
+  \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \small #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-4pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+  \begin{tabular*}{1.0\textwidth}{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \small #2\\
+  \end{tabular*}\vspace{-4pt}
+}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in,label={},itemsep=4pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.18in,itemsep=2pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4pt}}
+
+% ---------- Document ----------
+\begin{document}
+
+
+
+% ---------- Header ----------
+\begin{center}
+    {\Huge \scshape Devi S T}\\
+    Erode, Tamil Nadu, India\\
+    \small
+    \faPhone\ +91-6380688697 \quad
+    \faEnvelope\ \href{mailto:deviselvakumar2@gmail.com}{deviselvakumar2@gmail.com}\\
+    \faLinkedin\ \href{https://www.linkedin.com/in/devi-selvakumar}{linkedin.com/in/devi-selvakumar}
+    \quad
+    \faGithub\ \href{https://github.com/Git-by-Devi}{github.com/Git-by-Devi}
+    \quad
+    \faGlobe\ \href{https://deviselvakumar.vercel.app/}{deviselvakumar.vercel.app}
+\end{center}
+
+
+% ---------- Career Objective ----------
+\section{Career Objective}
+\small
+Engineering student (2027 batch) with strong programming fundamentals and hands-on experience building full-stack web applications, REST APIs, database-driven systems, and AI-powered solutions. Seeking a Software / Full Stack / AI Engineer role at GrayMatter Technologies to write clean, efficient code, solve real-world problems, and grow with emerging technologies in a collaborative team.
+
+
+% ---------- Education ----------
+\section{Education}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{M. Kumarasamy College of Engineering}{2023 -- 2027}
+{B.E. Electronics and Communication Engineering}{CGPA: 8.5/10}
+
+\resumeSubheading
+{SPK Matriculation Higher Secondary School}{2023}
+{Higher Secondary}{83\%}
+
+\resumeSubHeadingListEnd
+
+
+% ---------- Technical Skills ----------
+\section{Technical Skills}
+\small
+\begin{itemize}[leftmargin=0in,label={}]
+\item
+\textbf{Languages:} Java, Python, JavaScript, SQL \\
+\textbf{Frontend:} React.js, HTML, CSS, Bootstrap \\
+\textbf{Backend:} Node.js, Express.js, FastAPI, REST APIs, API Integration \\
+\textbf{Databases:} MySQL, MongoDB \\
+\textbf{AI / ML:} YOLO, ONNX Runtime, Generative AI \& LLM fundamentals \\
+\textbf{Tools \& Deployment:} Git, GitHub, Docker, Vercel, Render, VS Code, Eclipse \\
+\textbf{Core Concepts:} Data Structures \& Algorithms, Object-Oriented Programming, DBMS \\
+\end{itemize}
+
+% ---------- Internships ----------
+\section{Internships \& Training}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{IoT in Robotics -- Internship Training}{Jan 2025}
+{NSIC Technical Services Centre}{Chennai}
+\resumeItemListStart
+\resumeItem{Built software interfaces for IoT-based robotic systems and worked with sensor APIs and automation logic}
+\resumeItemListEnd
+
+\resumeSubheading
+{Intern -- Electronics Manufacturing}{Jun -- Jul 2025}
+{Popular Systems}{Coimbatore}
+\resumeItemListStart
+\resumeItem{Hands-on exposure to wiring and manufacturing for electronics, solar energy systems and medical equipment}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+% ---------- Projects ----------
+\section{Projects}
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+{LoomGuard-AI -- Textile Quality Assurance System $|$ Python, YOLO, ONNX Runtime, FastAPI, React, Docker}{}
+\resumeItemListStart
+\resumeItem{Developed an AI-based textile defect detection system using YOLO for automated quality inspection.}
+\resumeItem{Built a full-stack application with React, FastAPI, Docker, and ONNX Runtime for real-time defect analysis.}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{Hotel Management System $|$ Node.js, Express.js, REST APIs, HTML, CSS, MySQL}{}
+\resumeItemListStart
+\resumeItem{Created a hotel management application with room booking, user authentication, and admin dashboard functionalities.}
+\resumeItem{Implemented REST APIs and MySQL database integration for efficient booking and customer management.}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{Temple Management Application $|$ Node.js, JavaScript, Bootstrap, MySQL}{}
+\resumeItemListStart
+\resumeItem{Developed a full-stack temple management application supporting devotee registration, bookings, donation management, and receipt generation.}
+\resumeItem{Integrated OTP verification and database management features to enhance security and user experience.}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+% ---------- Certifications ----------
+\section{Certifications}
+\begin{itemize}[leftmargin=0.15in,itemsep=2pt]
+\item System Design Fundamentals -- Pearson (Coursera)
+\item Generative AI with Large Language Models -- Coursera
+\item Java (Basic) Certification -- HackerRank
+
+\end{itemize}
+
+% ---------- Achievements ----------
+\section{Achievements}
+\begin{itemize}[leftmargin=0.15in,itemsep=2pt]
+\item German Utility Model (Gebrauchsmuster) Granted -- Smart Fire Survivor Detection System, ID: 20264104647
+\item TUNARA '26 -- First Place in Product Expo
+\item ICCNCT 2026 -- Published an IEEE Research Paper titled ``Efficient Spectrum Sensing using Energy Detection''
+\item TCS CodeVita Season 13 -- Achieved Global Rank 7456
+\item HackIt '25 -- 24-hour National Hackathon
+\end{itemize}
+
+\end{document}
